@@ -23,22 +23,26 @@ const formula = document.querySelector("#formula");
 let operator = "";
 let intOne = "";
 let intTwo = "";
+let final = "";
 
 //basic math functions
 
 function add(intOne, intTwo) {
   let final = parseInt(intOne) + parseInt(intTwo);
   outcome.textContent = `${final}`;
+  return final;
 }
 
 function subtract(intOne, intTwo) {
   let final = parseInt(intOne) - parseInt(intTwo);
   outcome.textContent = `${final}`;
+  return final;
 }
 
 function multiply(intOne, intTwo) {
   let final = parseInt(intOne) * parseInt(intTwo);
   outcome.textContent = `${final}`;
+  return final;
 }
 
 function divide(intOne, intTwo) {
@@ -47,6 +51,7 @@ function divide(intOne, intTwo) {
   } else {
     let final = parseInt(intOne) / parseInt(intTwo);
     outcome.textContent = `${final}`;
+    return final;
   }
 }
 
@@ -106,10 +111,16 @@ buttons.forEach((buttons) => {
     ) {
       if (intOne != "" && operator == "") {
         operator = buttons.textContent;
-      } else if (buttons.textContent == "=") {
+      } else if (intOne != "" && intOne != "") {
         operate(operator, intOne, intTwo);
         formula.textContent = `${intOne} ${operator} ${intTwo}`;
+        intOne = "";
+        IntTwo = "";
+        operator = "";
       }
+    } else if (buttons.textContent == "=") {
+      operate(operator, intOne, intTwo);
+      formula.textContent = `${intOne} ${operator} ${intTwo}`;
     }
   });
 });
